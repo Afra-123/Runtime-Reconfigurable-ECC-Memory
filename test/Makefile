@@ -8,6 +8,7 @@
 SIM ?= verilator
 FST ?= -fst
 TOPLEVEL_LANG ?= verilog
+COMPILE_ARGS += --timing
 
 # Source directory
 SRC_DIR = $(PWD)/../src

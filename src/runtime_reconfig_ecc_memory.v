@@ -11,95 +11,7 @@
 // 11 = SECDED
 // ============================================================
 
-module runtime_reconfig_ecc_memory (
-    input  wire [7:0] ui_in,
-    output wire [7:0] uo_out,
-    input  wire [7:0] uio_in,
-    output wire [7:0] uio_out,
-    output wire [7:0] uio_oe,
-    input  wire       ena,
-    input  wire       clk,
-    input  wire       rst_n
-);
 
-    // --------------------------------------------------------
-    // Internal signals
-    // --------------------------------------------------------
-
-    wire [1:0] mode;
-    wire       we;
-    wire [2:0] addr;
-    wire [7:0] wdata;
-
-    wire [7:0] rdata;
-    wire       single_error;
-    wire       double_error;
-
-    // --------------------------------------------------------
-    // Input mapping
-    // --------------------------------------------------------
-
-    // ECC mode
-    assign mode = ui_in[1:0];
-
-    // Write enable
-    assign we = ui_in[2];
-
-    // Memory address
-    assign addr = ui_in[5:3];
-
-    // Write data
-    assign wdata[1:0] = ui_in[7:6];
-    assign wdata[7:2] = uio_in[5:0];
-
-    // --------------------------------------------------------
-    // Output mapping
-    // --------------------------------------------------------
-
-    // Read data
-    assign uo_out = rdata;
-
-    // Error flags
-    assign uio_out[0] = single_error;
-    assign uio_out[1] = double_error;
-
-    // Unused bidirectional outputs
-    assign uio_out[7:2] = 6'b0;
-
-    // --------------------------------------------------------
-    // Bidirectional pin directions
-    //
-    // uio[1:0] = outputs
-    // uio[7:2] = inputs
-    // --------------------------------------------------------
-
-    assign uio_oe[1:0] = 2'b11;
-    assign uio_oe[7:2] = 6'b000000;
-
-    // --------------------------------------------------------
-    // Enable is not required by the internal ECC core.
-    // --------------------------------------------------------
-
-    wire unused_ena;
-    assign unused_ena = ena;
-
-    // --------------------------------------------------------
-    // Instantiate the verified ECC memory core
-    // --------------------------------------------------------
-
-    runtime_reconfig_ecc_memory dut (
-        .clk          (clk),
-        .rst_n        (rst_n),
-        .mode         (mode),
-        .we           (we),
-        .addr         (addr),
-        .wdata        (wdata),
-        .rdata        (rdata),
-        .single_error (single_error),
-        .double_error (double_error)
-    );
-
-endmodule
 
 
 // ============================================================
@@ -530,3 +442,4 @@ module runtime_reconfig_ecc_memory (
     end
 
 endmodule
+`default_nettype wire

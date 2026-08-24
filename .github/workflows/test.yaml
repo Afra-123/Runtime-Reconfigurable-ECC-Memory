@@ -12,9 +12,17 @@ jobs:
       - name: Install Verilator
         shell: bash
         run: |
-              sudo apt-get update
-                sudo apt-get install -y verilator
-                      verilator --version
+                     sudo apt-get update
+                          sudo apt-get install -y git make autoconf g++ flex bison
+
+                             git clone --depth 1 --branch v5.036 https://github.com/verilator/verilator.git /tmp/verilator
+                               cd /tmp/verilator
+                                  autoconf
+                                   ./configure
+                                     make -j$(nproc)
+                                      sudo make install
+
+                                        verilator --version
 
       # Set Python up and install cocotb
       - name: Setup python

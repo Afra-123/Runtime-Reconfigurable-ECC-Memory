@@ -78,3 +78,6 @@ In SECDED mode, a single-bit error is corrected and indicated by `uio[0]`, while
 No external hardware is required.
 
 The project can be tested using the Tiny Tapeout digital interface and clock/reset signals. The design does not require an external PMOD, LED display, sensor, or other peripheral hardware.
+
+## Credits 
+We gratefully acknowledge the Center of Excellence (CoE) in Integrated Circuits and Systems (ICAS) and the Department of Electronics and Communication Engineering (ECE) for providing the necessary resources and guidance. Special thanks to Dr. H V Ravish Aradhya (HoD - ECE), Dr. K R Usha Rani (Associate Dean - PG), Dr. K. S. Geetha (Vice Principal) and Dr. K. N. Subramanya (Principal) for their constant encouragement and support in facilitating this Tiny Tapeout SKY26C submission. 

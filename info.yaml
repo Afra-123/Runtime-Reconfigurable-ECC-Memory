@@ -1,7 +1,7 @@
 # Tiny Tapeout project information
 project:
   title:        "Runtime-Reconfigurable ECC Memory"
-  author:       "Afra Feroz, Dhruvi Bhandari"
+  author:       "Afra Feroz, Dhruvi Bhandari, Shylashree N, RV College of Engineering"
   discord:      ""
   description:  "A runtime-reconfigurable memory supporting OFF, parity, Hamming, and SECDED error detection and correction modes."
   language:     "Verilog"

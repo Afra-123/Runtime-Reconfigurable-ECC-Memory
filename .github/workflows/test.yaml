@@ -1,8 +1,6 @@
 name: test
 
-on:
-  push:
-  workflow_dispatch:
+on: [push, workflow_dispatch]
 
 jobs:
   test:
@@ -14,26 +12,15 @@ jobs:
         with:
           submodules: recursive
 
-      - name: Install Verilator 5.036
-        shell: bash
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y git make autoconf g++ flex bison
-          git clone --depth 1 --branch v5.036 https://github.com/verilator/verilator.git /tmp/verilator
-          cd /tmp/verilator
-          autoconf
-          ./configure
-          make -j$(nproc)
-          sudo make install
-          verilator --version
-
       - name: Setup Python
         uses: actions/setup-python@v6
         with:
           python-version: '3.11'
 
+      - name: Install Verilator
+        run: sudo apt-get update && sudo apt-get install -y verilator
+
       - name: Install Python packages
-        shell: bash
         run: pip install -r test/requirements.txt
 
       - name: Run tests
@@ -50,7 +37,7 @@ jobs:
           paths: test/results.xml
 
       - name: Upload waveform and test results
-        if: success() || failure()
+        if: always()
         uses: actions/upload-artifact@v7
         with:
           name: test-results

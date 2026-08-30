@@ -12,22 +12,15 @@ jobs:
         with:
           submodules: recursive
 
-      - name: Setup Python
-        uses: actions/setup-python@v6
-        with:
-          python-version: '3.11'
-
       - name: Install Verilator
         run: sudo apt-get update && sudo apt-get install -y verilator
 
       - name: Install Python packages
-        run: pip install -r test/requirements.txt
+        run: python3 -m pip install -r test/requirements.txt
 
       - name: Run tests
         run: |
           cd test
-          unset PYTHONHOME
-          unset PYTHONPATH
           make clean
           make
           ! grep failure results.xml

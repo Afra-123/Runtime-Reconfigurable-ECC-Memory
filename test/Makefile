@@ -11,6 +11,7 @@ TOPLEVEL_LANG ?= verilog
 COMPILE_ARGS += --timing
 COMPILE_ARGS += -Wno-fatal
 COMPILE_ARGS += -Wno-PINMISSING
+COMPILE_ARGS += --bbox-unsup
 
 # Source directory
 SRC_DIR = $(PWD)/../src

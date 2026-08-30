@@ -9,6 +9,8 @@ SIM ?= verilator
 FST ?= -fst
 TOPLEVEL_LANG ?= verilog
 COMPILE_ARGS += --timing
+COMPILE_ARGS += -Wno-fatal
+COMPILE_ARGS += -Wno-PINMISSING
 
 # Source directory
 SRC_DIR = $(PWD)/../src

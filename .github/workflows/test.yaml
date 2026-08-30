@@ -26,6 +26,8 @@ jobs:
       - name: Run tests
         run: |
           cd test
+          unset PYTHONHOME
+          unset PYTHONPATH
           make clean
           make
           ! grep failure results.xml

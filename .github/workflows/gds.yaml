@@ -35,16 +35,9 @@ jobs:
           submodules: recursive
 
       - name: Install Verilator
-        shell: bash
         run: |
           sudo apt-get update
-          sudo apt-get install -y git make autoconf g++ flex bison
-          git clone --depth 1 --branch v5.036 https://github.com/verilator/verilator.git /tmp/verilator
-          cd /tmp/verilator
-          autoconf
-          ./configure
-          make -j$(nproc)
-          sudo make install
+          sudo apt-get install -y verilator
           verilator --version
 
       - name: GL test

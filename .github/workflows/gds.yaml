@@ -34,9 +34,21 @@ jobs:
         with:
           submodules: recursive
 
+      - name: Install Verilator
+        shell: bash
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y git make autoconf g++ flex bison
+          git clone --depth 1 --branch v5.036 https://github.com/verilator/verilator.git /tmp/verilator
+          cd /tmp/verilator
+          autoconf
+          ./configure
+          make -j$(nproc)
+          sudo make install
+          verilator --version
+
       - name: GL test
         uses: TinyTapeout/tt-gds-action/gl_test@ttsky26c
-
   viewer:
     needs: gds
     runs-on: ubuntu-24.04
